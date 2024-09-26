@@ -1,0 +1,30 @@
+# Color definitions
+RESET="\033[0m"
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+MAGENTA="\033[35m"
+CYAN="\033[36m"
+
+# Custom message before starting the process
+printf "${MAGENTA}🚀 Starting the pre-commit process... Good luck!${RESET}\n"
+
+# Run `npm check`
+printf "${YELLOW}🔍 Running 'npm check'...${RESET}\n"
+if ! npm run check; then
+  printf "${RED}❌ 'npm check' failed! Please fix the issues before committing. 😢${RESET}\n"
+  exit 1
+fi
+printf "${GREEN}✅ 'npm check' completed successfully!${RESET}\n"
+
+# Run `npm lint`
+printf "🔍 Running 'npm lint'..."
+if ! npm run lint; then
+  printf "${RED}❌ 'npm lint' failed! Please fix the issues before committing. 😢${RESET}\n"
+  exit 1
+fi
+printf "${GREEN}✅ 'npm lint' completed successfully!${RESET}\n"
+
+# Custom message after the process finishes
+printf "${CYAN}🎉 All checks passed! Ready to commit! 🚀\n"
