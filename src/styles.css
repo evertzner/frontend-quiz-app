@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.display {
+/* .display {
   @apply text-[144px] font-medium leading-[100%];
 }
 
@@ -28,7 +28,7 @@
 
 .body-s-italic {
   @apply text-[20px] font-normal italic leading-[150%];
-}
+} */
 
 @layer base {
   body {

@@ -1,8 +1,10 @@
-import Button from './Button';
+import Header from './Header';
+import Home from './Home';
 
 const Main = () => (
-  <main className='text-dark-navy'>
-    <Button />
+  <main className='flex items-start flex-col'>
+    <Header />
+    <Home />
   </main>
 );
 
