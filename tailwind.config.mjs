@@ -29,8 +29,17 @@ export default {
         green: {
           DEFAULT: '#26D782'
         },
+        greenish: {
+          DEFAULT: '#2FD887'
+        },
         red: {
           DEFAULT: '#EE5454'
+        },
+        blue: {
+          DEFAULT: '#306AFF'
+        },
+        orange: {
+          DEFAULT: '#FF7E35'
         }
       }
     }

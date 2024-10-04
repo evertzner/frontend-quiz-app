@@ -9,9 +9,17 @@ export type Question = {
   answer: string;
 };
 
+export type Color = {
+  light: string;
+  heavy: string;
+  hover: string;
+  selected: string;
+  selectedHover: string;
+};
+
 export type Quiz = {
   title: string;
-  color: string;
+  color: Color;
   icon: () => JSX.Element;
   questions: Question[];
 };
@@ -19,7 +27,13 @@ export type Quiz = {
 export const quizzes: Quiz[] = [
   {
     title: 'HTML',
-    color: 'bg-[#FFF1E9]',
+    color: {
+      light: 'bg-[#FFF1E9]',
+      heavy: 'bg-orange',
+      hover: 'group-hover:bg-[#FFF1E9]',
+      selected: 'ring-orange',
+      selectedHover: 'group-hover:bg-orange'
+    },
     icon: IconHtml,
     questions: [
       {
@@ -101,7 +115,13 @@ export const quizzes: Quiz[] = [
   },
   {
     title: 'CSS',
-    color: 'bg-[#E0FDEF]',
+    color: {
+      light: 'bg-[#E0FDEF]',
+      heavy: 'bg-greenish',
+      hover: 'group-hover:bg-[#E0FDEF]',
+      selected: 'ring-greenish',
+      selectedHover: 'group-hover:bg-greenish'
+    },
     icon: IconCss,
     questions: [
       {
@@ -178,7 +198,13 @@ export const quizzes: Quiz[] = [
   },
   {
     title: 'JavaScript',
-    color: 'bg-[#EBF0FF]',
+    color: {
+      light: 'bg-[#EBF0FF]',
+      heavy: 'bg-blue',
+      hover: 'group-hover:bg-[#EBF0FF]',
+      selected: 'ring-blue',
+      selectedHover: 'group-hover:bg-blue'
+    },
     icon: IconJs,
     questions: [
       {
@@ -265,7 +291,13 @@ export const quizzes: Quiz[] = [
   },
   {
     title: 'Accessibility',
-    color: 'bg-[#F6E7FF]',
+    color: {
+      light: 'bg-[#F6E7FF]',
+      heavy: 'bg-purple',
+      hover: 'group-hover:bg-[#F6E7FF]',
+      selected: 'ring-purple',
+      selectedHover: 'group-hover:bg-purple'
+    },
     icon: IconAccessibility,
     questions: [
       {

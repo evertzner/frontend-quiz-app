@@ -1,4 +1,4 @@
-import Tile from './Tile';
+import { CategoryTile } from './Tiles';
 import { quizzes } from '../utils/data';
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
       </div>
       <div className='flex flex-col items-start gap-3 self-stretch'>
         {quizzes.map((quiz) => (
-          <Tile quiz={quiz} />
+          <CategoryTile quiz={quiz} key={quiz.title} />
         ))}
       </div>
     </div>
