@@ -6,11 +6,11 @@ import {
   selectedCategory,
   currentStatus,
   selectedOption,
-  result,
   totalScore
 } from '../utils/store';
 import { useEffect, useState } from 'react';
 import Button from './Button';
+import IconError from '../icons/Error';
 
 const Question = () => {
   const $currentStep = useStore(currentStep);
@@ -20,8 +20,8 @@ const Question = () => {
   const $totalScore = useStore(totalScore);
   const quiz = quizzes.find((quiz) => quiz.title === $selectedCategory);
   const [status, setStatus] = useState('Submit Answer');
-
-  const width = `calc(100% - ${50}%)`;
+  const questionPercentage = ($currentStep / quiz?.questions.length!) * 100;
+  const width = `calc(100% - ${100 - questionPercentage}%)`;
 
   useEffect(() => {
     if ($currentStep === quiz?.questions.length && $currentStatus === 'submitted') {
@@ -37,6 +37,7 @@ const Question = () => {
     if ($selectedOption !== '') {
       const error = document.getElementById('error') as HTMLDivElement;
       error.classList.add('hidden');
+      error.classList.add('flex');
     }
   }, [$selectedOption]);
 
@@ -59,6 +60,7 @@ const Question = () => {
     if ($selectedOption === '') {
       const error = document.getElementById('error') as HTMLDivElement;
       error.classList.remove('hidden');
+      error.classList.add('flex');
       return;
     }
 
@@ -73,7 +75,6 @@ const Question = () => {
 
       selectedOption.set('');
       currentStatus.set('idle');
-      result.set('unanswered');
       setStatus('Submit Answer');
 
       if ($currentStep === quiz?.questions.length) {
@@ -96,7 +97,7 @@ const Question = () => {
           <div className='self-stretch italic text-sm leading-[150%] text-grey-navy dark:text-light-bluish'>
             Question {$currentStep} of {quiz?.questions.length}
           </div>
-          <div className='self-stretch font-medium text-xl leading-[120%] text-dark-navy dark:text-white'>
+          <div className='self-stretch min-h-28 font-medium text-xl leading-[120%] text-dark-navy dark:text-white'>
             {quiz?.questions[$currentStep - 1]?.question}
           </div>
         </div>
@@ -104,7 +105,7 @@ const Question = () => {
           <div className='h-full bg-purple rounded-full' id='progress'></div>
         </div>
       </div>
-      <div className='flex flex-col items-start gap-3 self-stretch'>
+      <div className='flex flex-col items-center gap-3 self-stretch'>
         {quiz?.questions[$currentStep - 1]?.options.map((option, index) => (
           <Tile
             quiz={quiz}
@@ -115,8 +116,13 @@ const Question = () => {
           />
         ))}
         <Button text={status} onClick={handleClick} />
-        <div className='hidden' id='error'>
-          Please select an answer
+        <div className='hidden items-center gap-2' id='error'>
+          <div className='h-8 w-8 flex items-center'>
+            <IconError />
+          </div>
+          <div className='text-red text-lg leading-[100%] dark:text-white'>
+            Please select an answer
+          </div>
         </div>
       </div>
     </div>

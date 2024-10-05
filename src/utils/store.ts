@@ -16,6 +16,3 @@ export const selectedOption = atom<string>('');
 
 export type Status = 'idle' | 'submitted' | 'finished';
 export const currentStatus = atom<Status>('idle');
-
-export type Result = 'correct' | 'incorrect' | 'unanswered';
-export const result = atom<Result>('unanswered');
