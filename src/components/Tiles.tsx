@@ -1,6 +1,8 @@
-import { type Quiz } from '../utils/data';
+import { type Quiz, type Question } from '../utils/data';
 import { useStore } from '@nanostores/react';
-import { currentStep, selectedCategory, selectedOption } from '../utils/store';
+import { currentStep, selectedCategory, selectedOption, currentStatus } from '../utils/store';
+import IconCorrect from '../icons/Correct';
+import IconIncorrect from '../icons/Incorrect';
 
 interface CategoryTileProps {
   quiz: Quiz;
@@ -31,10 +33,12 @@ interface TileProps {
   option: string;
   index: number;
   quiz: Quiz;
+  question: Question;
 }
 
-export const Tile = ({ option, index, quiz }: TileProps) => {
+export const Tile = ({ option, index, quiz, question }: TileProps) => {
   const $selectedOption = useStore(selectedOption);
+  const $currentStatus = useStore(currentStatus);
 
   let questionLetter = '';
 
@@ -56,21 +60,46 @@ export const Tile = ({ option, index, quiz }: TileProps) => {
   }
 
   const selectOption = () => {
+    if ($currentStatus === 'submitted') {
+      return;
+    }
+
     selectedOption.set(option);
   };
 
   return (
     <button
-      className={`outline-none p-3 flex items-center gap-4 self-stretch rounded-xl bg-white dark:bg-navy shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] group dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)] ${$selectedOption === option ? `${quiz.color.selected} ring-[3px]` : 'ring-transparent'}`}
+      className={`outline-none p-3 grid grid-cols-[max-content_1fr_32px] items-center gap-4 self-stretch rounded-xl bg-white dark:bg-navy 
+        shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] group dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)] 
+        ${$selectedOption === option ? `${quiz.color.selected} ring-[3px]` : 'ring-transparent'} 
+        ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'ring-[3px] ring-green' : ''} 
+        ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'ring-[3px] ring-red' : ''}`}
       onClick={selectOption}
     >
       <div
-        className={`min-w-10 min-h-10 flex justify-center items-center ${$selectedOption === option ? `${quiz.color.heavy} ${quiz.color.selectedHover} text-white` : 'bg-light-grey text-grey-navy'} rounded-md p-[5.71px] text-lg font-medium leading-[100%]  ${quiz.color.hover} `}
+        className={`min-w-10 min-h-10 flex justify-center items-center 
+          rounded-md p-[5.71px] text-lg font-medium leading-[100%]  
+          ${$selectedOption === option ? `${quiz.color.heavy} ${quiz.color.selectedHover} text-white` : 'bg-light-grey text-grey-navy'} 
+          ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'bg-green' : ''} 
+          ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'bg-red' : ''}
+          ${quiz.color.hover} `}
       >
         {questionLetter}
       </div>
       <div className='text-lg font-medium leading-[100%] text-dark-navy dark:text-white text-start'>
         {option}
+      </div>
+      <div>
+        <div
+          className={`w-8 h-8 items-center ${$currentStatus === 'submitted' && question.answer === option ? 'flex' : 'hidden'}`}
+        >
+          <IconCorrect />
+        </div>
+        <div
+          className={`w-8 h-8 items-center ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'flex' : 'hidden'}`}
+        >
+          <IconIncorrect />
+        </div>
       </div>
     </button>
   );
