@@ -91,13 +91,13 @@ const Question = () => {
   };
 
   return (
-    <div className='pt-8 px-6 flex flex-col items-center gap-10 flex-shrink-0 self-stretch'>
-      <div className='flex flex-col items-center gap-6 self-stretch'>
-        <div className='flex flex-col items-start gap-3 self-stretch'>
-          <div className='self-stretch italic text-sm leading-[150%] text-grey-navy dark:text-light-bluish'>
+    <div className='pt-8 md:pt-2 px-6 md:px-16 flex flex-col items-center gap-10 md:gap-16 flex-shrink-0 self-stretch'>
+      <div className='flex flex-col items-center gap-6 md:gap-10 self-stretch'>
+        <div className='flex flex-col items-start gap-3 md:gap-7 self-stretch'>
+          <div className='self-stretch italic text-sm md:text-xl leading-[150%] text-grey-navy dark:text-light-bluish'>
             Question {$currentStep} of {quiz?.questions.length}
           </div>
-          <div className='self-stretch min-h-28 font-medium text-xl leading-[120%] text-dark-navy dark:text-white'>
+          <div className='self-stretch min-h-28 md:min-h-40 font-medium text-xl md:text-4xl leading-[120%] text-dark-navy dark:text-white'>
             {quiz?.questions[$currentStep - 1]?.question}
           </div>
         </div>
@@ -105,7 +105,7 @@ const Question = () => {
           <div className='h-full bg-purple rounded-full' id='progress'></div>
         </div>
       </div>
-      <div className='flex flex-col items-center gap-3 self-stretch'>
+      <div className='flex flex-col items-center gap-3 md:gap-6 self-stretch'>
         {quiz?.questions[$currentStep - 1]?.options.map((option, index) => (
           <Tile
             quiz={quiz}
@@ -117,10 +117,10 @@ const Question = () => {
         ))}
         <Button text={status} onClick={handleClick} />
         <div className='hidden items-center gap-2' id='error'>
-          <div className='h-8 w-8 flex items-center'>
+          <div className='w-8 h-8 md:w-10 md:h-10 flex items-center'>
             <IconError />
           </div>
-          <div className='text-red text-lg leading-[100%] dark:text-white'>
+          <div className='text-red text-lg md:text-2xl leading-[100%] dark:text-white'>
             Please select an answer
           </div>
         </div>
