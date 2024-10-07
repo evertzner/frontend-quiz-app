@@ -91,13 +91,13 @@ const Question = () => {
   };
 
   return (
-    <div className='pt-8 md:pt-2 px-6 md:px-16 flex flex-col items-center gap-10 md:gap-16 flex-shrink-0 self-stretch'>
-      <div className='flex flex-col items-center gap-6 md:gap-10 self-stretch'>
+    <div className='pt-8 md:pt-2 xl:pt-1 px-6 md:px-16 xl:px-[140px] flex xl:grid flex-col xl:grid-cols-2 items-center xl:items-start xl:justify-between gap-10 md:gap-16 flex-shrink-0 self-stretch'>
+      <div className='flex flex-col items-center xl:justify-between xl:h-[452px] xl:min-w-[465px] gap-6 md:gap-10 self-stretch'>
         <div className='flex flex-col items-start gap-3 md:gap-7 self-stretch'>
           <div className='self-stretch italic text-sm md:text-xl leading-[150%] text-grey-navy dark:text-light-bluish'>
             Question {$currentStep} of {quiz?.questions.length}
           </div>
-          <div className='self-stretch min-h-28 md:min-h-40 font-medium text-xl md:text-4xl leading-[120%] text-dark-navy dark:text-white'>
+          <div className='self-stretch min-h-28 md:min-h-40 xl:min-h-52 font-medium text-xl md:text-4xl leading-[120%] text-dark-navy dark:text-white'>
             {quiz?.questions[$currentStep - 1]?.question}
           </div>
         </div>

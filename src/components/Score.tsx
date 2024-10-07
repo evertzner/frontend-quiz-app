@@ -22,7 +22,7 @@ const Score = () => {
   };
 
   return (
-    <div className='pt-8 md:pt-2 px-6 md:px-16 flex flex-col items-center gap-10 md:gap-16 flex-shrink-0 self-stretch'>
+    <div className='pt-8 md:pt-2 xl:pt-1 px-6 md:px-16 xl:px-[140px] flex xl:grid flex-col xl:grid-cols-2 items-center xl:items-start xl:justify-between gap-10 md:gap-16 flex-shrink-0 self-stretch'>
       <div className='flex flex-col items-start gap-4 self-stretch'>
         <div className='flex flex-col items-start gap-2 *:self-stretch text-dark-navy text-[40px] md:text-[64px] leading-[100%] dark:text-white'>
           <div className='font-light'>Quiz completed</div>

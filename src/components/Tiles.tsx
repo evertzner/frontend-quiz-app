@@ -16,7 +16,7 @@ export const CategoryTile = ({ quiz }: CategoryTileProps) => {
 
   return (
     <button
-      className={`outline-none p-3 flex items-center gap-4 md:gap-8 self-stretch rounded-xl md:rounded-3xl bg-white dark:bg-navy shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)]`}
+      className={`outline-none p-3 xl:min-w-[564px] xl:p-5 flex items-center gap-4 md:gap-8 self-stretch rounded-xl md:rounded-3xl bg-white dark:bg-navy shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)]`}
       onClick={selectCategory}
     >
       <div
@@ -71,7 +71,7 @@ export const Tile = ({ option, index, quiz, question }: TileProps) => {
 
   return (
     <button
-      className={`outline-none p-3 grid grid-cols-[max-content_1fr_32px] md:grid-cols-[max-content_1fr_40px] items-center gap-4 md:gap-8 self-stretch rounded-xl md:rounded-3xl bg-white dark:bg-navy 
+      className={`outline-none px-3 py-3 xl:px-5 xl:py-[18px] grid grid-cols-[max-content_1fr_32px] md:grid-cols-[max-content_1fr_40px] xl:min-w-[564px] items-center gap-4 md:gap-8 self-stretch rounded-xl md:rounded-3xl bg-white dark:bg-navy 
         shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] group dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)] 
         ${$selectedOption === option ? `${quiz.color.selected} ring-[3px]` : 'ring-transparent'} 
         ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'ring-[3px] ring-green' : ''} 
@@ -80,7 +80,7 @@ export const Tile = ({ option, index, quiz, question }: TileProps) => {
     >
       <div
         className={`min-w-10 min-h-10 md:min-w-14 md:min-h-14 flex justify-center items-center 
-          rounded-md md:rounded-xl p-[5.71px] text-lg text-[28px] font-medium leading-[100%]  
+          rounded-md md:rounded-xl p-[5.71px] text-lg md:text-[28px] font-medium leading-[100%]  
           ${$selectedOption === option ? `${quiz.color.heavy} ${quiz.color.selectedHover} text-white` : 'bg-light-grey text-grey-navy'} 
           ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'bg-green' : ''} 
           ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'bg-red' : ''}

@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <div
-      className={`flex h-[72px] px-6 py-4 md:py-10 md:px-16 md:h-[136px] ${$currentStep === 0 ? 'justify-end' : 'justify-between'} items-center self-stretch`}
+      className={`flex h-[72px] md:h-[136px] xl:h-[216px] px-6 md:px-16 xl:px-[140px] py-4 md:py-10 xl:py-20 ${$currentStep === 0 ? 'justify-end' : 'justify-between'} items-center self-stretch`}
     >
       <div className={`flex items-center gap-4 md:gap-6 ${$currentStep === 0 && 'hidden'}`}>
         <div
@@ -18,7 +18,7 @@ const Header = () => {
         >
           {quiz?.icon()}
         </div>
-        <div className='dark:text-white text-dark-navy text-lg text-[28px] font-medium leading-[100%]'>
+        <div className='dark:text-white text-dark-navy text-lg md:text-[28px] font-medium leading-[100%]'>
           {quiz?.title}
         </div>
       </div>
