@@ -69,22 +69,59 @@ export const Tile = ({ option, index, quiz, question }: TileProps) => {
     selectedOption.set(option);
   };
 
+  const buttonClass = () => {
+    if ($currentStatus === 'idle' && $selectedOption === option) {
+      return `ring-[3px] ${quiz.color.selected}`;
+    } else if (
+      $currentStatus === 'submitted' &&
+      question.answer === option &&
+      option === $selectedOption
+    ) {
+      return `ring-[3px] ring-green`;
+    } else if (
+      $currentStatus === 'submitted' &&
+      question.answer !== option &&
+      option === $selectedOption
+    ) {
+      return `ring-[3px] ring-red`;
+    } else {
+      return `ring-transparent`;
+    }
+  };
+
+  const badgeClass = () => {
+    if ($currentStatus === 'idle' && $selectedOption === option) {
+      return `${quiz.color.heavy} ${quiz.color.selectedHover} text-white`;
+    } else if (
+      $currentStatus === 'submitted' &&
+      question.answer === option &&
+      option === $selectedOption
+    ) {
+      return `bg-green text-white group-hover:bg-green`;
+    } else if (
+      $currentStatus === 'submitted' &&
+      question.answer !== option &&
+      option === $selectedOption
+    ) {
+      return `bg-red text-white group-hover:bg-red`;
+    } else if ($currentStatus === 'submitted') {
+      return `bg-light-grey text-grey-navy group-hover:bg-light-grey`;
+    } else {
+      return 'bg-light-grey text-grey-navy';
+    }
+  };
+
   return (
     <button
       className={`outline-none px-3 py-3 xl:px-5 xl:py-[18px] grid grid-cols-[max-content_1fr_32px] md:grid-cols-[max-content_1fr_40px] xl:min-w-[564px] items-center gap-4 md:gap-8 self-stretch rounded-xl md:rounded-3xl bg-white dark:bg-navy 
         shadow-[0px_16px_40px_0px_rgba(143,160,193,0.14)] group dark:shadow-[0px_16px_40px_0px_rgba(49,62,81,0.14)] 
-        ${$selectedOption === option ? `${quiz.color.selected} ring-[3px]` : 'ring-transparent'} 
-        ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'ring-[3px] ring-green' : ''} 
-        ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'ring-[3px] ring-red' : ''}`}
+       ${buttonClass()}`}
       onClick={selectOption}
     >
       <div
         className={`min-w-10 min-h-10 md:min-w-14 md:min-h-14 flex justify-center items-center 
           rounded-md md:rounded-xl p-[5.71px] text-lg md:text-[28px] font-medium leading-[100%]  
-          ${$selectedOption === option ? `${quiz.color.heavy} ${quiz.color.selectedHover} text-white` : 'bg-light-grey text-grey-navy'} 
-          ${$currentStatus === 'submitted' && question.answer === option && option === $selectedOption ? 'bg-green' : ''} 
-          ${$currentStatus === 'submitted' && question.answer !== option && option === $selectedOption ? 'bg-red' : ''}
-          ${quiz.color.hover} `}
+          ${quiz.color.hover} ${badgeClass()}`}
       >
         {questionLetter}
       </div>

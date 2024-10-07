@@ -18,15 +18,16 @@ const Question = () => {
   const $currentStatus = useStore(currentStatus);
   const $selectedOption = useStore(selectedOption);
   const $totalScore = useStore(totalScore);
-  const quiz = quizzes.find((quiz) => quiz.title === $selectedCategory);
+  const quiz = quizzes.find((quiz) => quiz.title === $selectedCategory)!;
+  const questions = quiz.questions[$currentStep - 1]!;
   const [status, setStatus] = useState('Submit Answer');
-  const questionPercentage = ($currentStep / quiz?.questions.length!) * 100;
+  const questionPercentage = ($currentStep / quiz.questions.length!) * 100;
   const width = `calc(100% - ${100 - questionPercentage}%)`;
 
   useEffect(() => {
-    if ($currentStep === quiz?.questions.length && $currentStatus === 'submitted') {
+    if ($currentStep === quiz.questions.length && $currentStatus === 'submitted') {
       setStatus('Finish Quiz');
-    } else if ($currentStatus === 'submitted' && $currentStep < quiz?.questions.length!) {
+    } else if ($currentStatus === 'submitted' && $currentStep < quiz.questions.length!) {
       setStatus('Next Question');
     } else {
       setStatus('Submit Answer');
@@ -47,9 +48,9 @@ const Question = () => {
   }, [width]);
 
   useEffect(() => {
-    if ($currentStatus === 'submitted' && $currentStep < quiz?.questions.length!) {
+    if ($currentStatus === 'submitted' && $currentStep < quiz.questions.length!) {
       setStatus('Next Question');
-    } else if ($currentStep === quiz?.questions.length && $currentStatus === 'submitted') {
+    } else if ($currentStep === quiz.questions.length && $currentStatus === 'submitted') {
       setStatus('Finish Quiz');
     } else {
       setStatus('Submit Answer');
@@ -69,7 +70,7 @@ const Question = () => {
     if (status === 'Next Question') {
       currentStep.set($currentStep + 1);
 
-      if (quiz?.questions[$currentStep - 1]?.answer === $selectedOption) {
+      if (questions.answer === $selectedOption) {
         totalScore.set($totalScore + 1);
       }
 
@@ -77,13 +78,13 @@ const Question = () => {
       currentStatus.set('idle');
       setStatus('Submit Answer');
 
-      if ($currentStep === quiz?.questions.length) {
+      if ($currentStep === quiz.questions.length) {
         currentStatus.set('finished');
       }
     }
 
     if (status === 'Finish Quiz') {
-      if (quiz?.questions[$currentStep - 1]?.answer === $selectedOption) {
+      if (questions.answer === $selectedOption) {
         totalScore.set($totalScore + 1);
       }
       currentStatus.set('finished');
@@ -95,10 +96,10 @@ const Question = () => {
       <div className='flex flex-col items-center xl:justify-between xl:h-[452px] xl:min-w-[465px] gap-6 md:gap-10 self-stretch'>
         <div className='flex flex-col items-start gap-3 md:gap-7 self-stretch'>
           <div className='self-stretch italic text-sm md:text-xl leading-[150%] text-grey-navy dark:text-light-bluish'>
-            Question {$currentStep} of {quiz?.questions.length}
+            Question {$currentStep} of {quiz.questions.length}
           </div>
           <div className='self-stretch min-h-28 md:min-h-40 xl:min-h-52 font-medium text-xl md:text-4xl leading-[120%] text-dark-navy dark:text-white'>
-            {quiz?.questions[$currentStep - 1]?.question}
+            {questions.question}
           </div>
         </div>
         <div className='flex h-4 p-1 flex-col justify-center items-start gap-2 self-stretch rounded-full w-full bg-white'>
@@ -106,14 +107,8 @@ const Question = () => {
         </div>
       </div>
       <div className='flex flex-col items-center gap-3 md:gap-6 self-stretch'>
-        {quiz?.questions[$currentStep - 1]?.options.map((option, index) => (
-          <Tile
-            quiz={quiz}
-            question={quiz?.questions[$currentStep - 1]!}
-            option={option}
-            key={index}
-            index={index}
-          />
+        {questions.options.map((option, index) => (
+          <Tile quiz={quiz} question={questions} option={option} key={index} index={index} />
         ))}
         <Button text={status} onClick={handleClick} />
         <div className='hidden items-center gap-2' id='error'>

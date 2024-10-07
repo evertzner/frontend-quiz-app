@@ -6,7 +6,7 @@ import { quizzes } from '../utils/data';
 const Header = () => {
   const $currentStep = useStore(currentStep);
   const $selectedCategory = useStore(selectedCategory);
-  const quiz = quizzes.find((quiz) => quiz.title === $selectedCategory);
+  const quiz = quizzes.find((quiz) => quiz.title === $selectedCategory)!;
 
   return (
     <div
@@ -14,12 +14,12 @@ const Header = () => {
     >
       <div className={`flex items-center gap-4 md:gap-6 ${$currentStep === 0 && 'hidden'}`}>
         <div
-          className={`${quiz?.color.light} p-[5.71px] md:p-2 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-[4px] md:rounded-lg`}
+          className={`${quiz.color.light} p-[5.71px] md:p-2 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-[4px] md:rounded-lg`}
         >
-          {quiz?.icon()}
+          {quiz.icon()}
         </div>
         <div className='dark:text-white text-dark-navy text-lg md:text-[28px] font-medium leading-[100%]'>
-          {quiz?.title}
+          {quiz.title}
         </div>
       </div>
       <ToggleTheme />
