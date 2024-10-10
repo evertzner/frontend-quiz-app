@@ -2,34 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .display {
-  @apply text-[144px] font-medium leading-[100%];
-}
-
-.heading-l-bold {
-  @apply text-[64px] font-medium leading-[100%];
-}
-
-.heading-l-regular {
-  @apply text-[64px] font-light leading-[100%];
-}
-
-.heading-m {
-  @apply text-[36px] font-medium leading-[120%];
-}
-
-.heading-s {
-  @apply text-lg md:text-[28px] font-medium leading-[100%];
-}
-
-.body-m {
-  @apply text-[24px] font-normal leading-[150%];
-}
-
-.body-s-italic {
-  @apply text-[20px] font-normal italic leading-[150%];
-} */
-
 @layer base {
   body {
     font-family: 'Rubik', sans-serif;
